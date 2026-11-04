@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 .venv/
+.venv-tools/
 
 # Gerados pelo build.bat / PyInstaller (são refeitos a cada build)
 build/

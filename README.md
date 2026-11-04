@@ -56,6 +56,15 @@ songs/minha-musica/
 
 ### Jeito automático (recomendado): `audio_to_ultrastar.py`
 
+**Mais fácil:** dois cliques em `criar_musicas.bat` (na pasta do projeto, ao lado do `build.bat`).
+Ele usa a pasta `Karaoke App\songs` se ela existir (senão, `songs`), instala o que falta na primeira vez
+e processa os áudios novos, num ambiente próprio (`.venv-tools`) com Python 3.11 a 3.14
+(se só tiver o 3.15, instale o 3.12: `winget install Python.Python.3.12`). Precisa do ffmpeg (`winget install ffmpeg`). Depois, abra o Karaokê e
+clique em **Recarregar**. Essas ferramentas ficam só no seu computador: quem receber a pasta
+`Karaoke App` não precisa delas, só das músicas já prontas.
+
+Pela linha de comando (equivalente):
+
 ```bash
 pip install -r requirements-tools.txt     # demucs + librosa (precisa de ffmpeg no PATH)
 # 1) jogue os áudios ORIGINAIS (com voz) em songs/, de preferência como "Artista - Título.mp3"

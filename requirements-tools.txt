@@ -1,3 +1,4 @@
+# Use Python 3.11 a 3.14 (no 3.15 o demucs nao instala: faltam pacotes prontos)
 # ferramentas de criação de músicas (não são necessárias para só cantar)
 demucs
 librosa
