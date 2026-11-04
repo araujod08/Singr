@@ -6,7 +6,7 @@ __pycache__/
 # Gerados pelo build.bat / PyInstaller (são refeitos a cada build)
 build/
 dist/
-Karaoke/
+Karaoke App/
 *.spec
 
 # Temporários das ferramentas de criação de músicas

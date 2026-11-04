@@ -27,29 +27,29 @@ if exist "icon.ico" set "ICONE=--icon icon.ico"
 python -m PyInstaller --noconfirm --clean --noconsole --onedir --name Karaoke %ICONE% --collect-all _sounddevice_data main.py
 if errorlevel 1 goto :erro
 
-REM ---- 3) pasta final facil de achar: "Karaoke" ao lado deste arquivo ----
-echo [3/4] Montando a pasta "Karaoke"...
+REM ---- 3) pasta final facil de achar: "Karaoke App" ao lado deste arquivo ----
+echo [3/4] Montando a pasta "Karaoke App"...
 REM /MIR atualiza o programa, mas NAO mexe na subpasta songs (suas musicas ficam salvas)
-robocopy "dist\Karaoke" "Karaoke" /MIR /XD songs /NFL /NDL /NJH /NJS /NP >nul
+robocopy "dist\Karaoke" "Karaoke App" /MIR /XD songs /NFL /NDL /NJH /NJS /NP >nul
 if errorlevel 8 goto :erro
-robocopy "songs" "Karaoke\songs" /E /NFL /NDL /NJH /NJS /NP >nul
+robocopy "songs" "Karaoke App\songs" /E /NFL /NDL /NJH /NJS /NP >nul
 if errorlevel 8 goto :erro
 
 REM ---- 4) atalho na Area de Trabalho ----
 echo [4/4] Atalho
 choice /c SN /m "Criar atalho na Area de Trabalho"
 if errorlevel 2 goto :fim
-powershell -NoProfile -Command "$s=(New-Object -ComObject WScript.Shell).CreateShortcut([Environment]::GetFolderPath('Desktop')+'\Karaoke.lnk'); $s.TargetPath='%CD%\Karaoke\Karaoke.exe'; $s.WorkingDirectory='%CD%\Karaoke'; $s.Save()"
+powershell -NoProfile -Command "$s=(New-Object -ComObject WScript.Shell).CreateShortcut([Environment]::GetFolderPath('Desktop')+'\Karaoke.lnk'); $s.TargetPath='%CD%\Karaoke App\Karaoke.exe'; $s.WorkingDirectory='%CD%\Karaoke App'; $s.Save()"
 if errorlevel 1 echo Nao consegui criar o atalho, mas o programa esta pronto.
 
 :fim
 echo.
 echo ============================================
 echo   PRONTO!
-echo   Programa: %CD%\Karaoke\Karaoke.exe
-echo   Musicas:  %CD%\Karaoke\songs
+echo   Programa: %CD%\Karaoke App\Karaoke.exe
+echo   Musicas:  %CD%\Karaoke App\songs
 echo ============================================
-explorer "Karaoke"
+explorer "Karaoke App"
 pause
 exit /b 0
 

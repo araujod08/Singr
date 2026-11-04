@@ -16,10 +16,10 @@ python main.py
 ## Gerar o .exe (Windows)
 
 Dê dois cliques em `build.bat`. Ele cria o ambiente virtual, instala tudo, gera o executável e entrega
-a pasta **`Karaoke`** ao lado do `build.bat` (abre sozinha no fim), com `Karaoke.exe` e `songs\`.
+a pasta **`Karaoke App`** ao lado do `build.bat` (abre sozinha no fim), com `Karaoke.exe` e `songs\`.
 Ele também pergunta se quer um atalho na Área de Trabalho.
-Rodar de novo atualiza o programa sem apagar as músicas que você pôs em `Karaoke\songs`.
-Para distribuir, compacte a pasta `Karaoke` inteira. (Opcional: um `icon.ico` ao lado do
+Rodar de novo atualiza o programa sem apagar as músicas que você pôs em `Karaoke App\songs`.
+Para distribuir, compacte a pasta `Karaoke App` inteira. (Opcional: um `icon.ico` ao lado do
 `build.bat` vira o ícone do programa.)
 
 ## Como usar
