@@ -1,0 +1,24 @@
+#TITLE:Escala de Dó (demo)
+#ARTIST:Karaokê
+#MP3:playback.wav
+#BPM:120
+#GAP:1000
+: 0 6 0 Dó 
+: 8 6 2 Ré 
+: 16 6 4 Mi 
+: 24 6 5 Fá 
+- 32
+: 32 6 7 Sol 
+: 40 6 9 Lá 
+: 48 6 11 Si 
+* 56 6 12 Dó 
+- 64
+: 64 6 11 Si 
+: 72 6 9 Lá 
+: 80 6 7 Sol 
+: 88 6 5 Fá 
+- 96
+: 96 6 4 Mi 
+: 104 6 2 Ré 
+* 112 16 0 Dó
+E

@@ -1,0 +1,8 @@
+# ferramentas de criação de músicas (não são necessárias para só cantar)
+demucs
+librosa
+scipy
+# opcional (--letra): transcrição automática da letra
+# faster-whisper
+# opcional (midi_to_ultrastar.py)
+# pretty_midi

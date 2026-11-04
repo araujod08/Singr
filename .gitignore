@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Gerados pelo build.bat / PyInstaller (são refeitos a cada build)
+build/
+dist/
+Karaoke/
+*.spec
+
+# Temporários das ferramentas de criação de músicas
+_tmp/
+
+# Músicas: pesadas e geralmente com direitos autorais. Só a demo vai pro Git.
+songs/*
+!songs/demo-escala-de-do/
