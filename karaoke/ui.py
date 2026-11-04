@@ -34,7 +34,13 @@ QProgressBar { background: #121829; border: 1px solid #2c3760; border-radius: 6p
 QProgressBar::chunk { background: #37e08a; border-radius: 5px; }
 QLabel#h1 { font-size: 22px; font-weight: bold; }
 QLabel#muted { color: #8791b0; }
+QLabel#footer { color: #8791b0; font-size: 12px; padding: 6px 0 9px 0; }
 """
+
+
+# Créditos exibidos no rodapé (edite aqui)
+CREDITS_LABEL = "By:"
+CREDITS_URL = "https://github.com/araujod08"
 
 
 def _fmt_score(n: int) -> str:
@@ -696,7 +702,23 @@ class MainWindow(QMainWindow):
         self.result = ResultScreen()
         for s in (self.library, self.play, self.result):
             self.stack.addWidget(s)
-        self.setCentralWidget(self.stack)
+
+        self.footer = QLabel(
+            f'{CREDITS_LABEL} <a href="{CREDITS_URL}"><span style="text-decoration:none; '
+            f'color:#7f9bff;">{CREDITS_URL}</span></a>')
+        self.footer.setObjectName("footer")
+        self.footer.setAlignment(Qt.AlignCenter)
+        self.footer.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        self.footer.setOpenExternalLinks(True)  # clique abre o GitHub no navegador
+        central = QWidget()
+        box = QVBoxLayout(central)
+        box.setContentsMargins(0, 0, 0, 0)
+        box.setSpacing(0)
+        box.addWidget(self.stack, 1)
+        box.addWidget(self.footer)
+        self.setCentralWidget(central)
+        self.stack.currentChanged.connect(
+            lambda _: self.footer.setHidden(self.stack.currentWidget() is self.play))
 
         self.library.start_requested.connect(self._start)
         self.play.finished.connect(self._finished)
