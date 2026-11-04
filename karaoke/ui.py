@@ -2,11 +2,12 @@
 from __future__ import annotations
 
 import math
+import sys
 import time
 from pathlib import Path
 
 from PySide6.QtCore import QPointF, QRectF, QSettings, Qt, QThread, QTimer, QUrl, Signal
-from PySide6.QtGui import QColor, QDesktopServices, QFont, QFontMetrics, QPainter, QPen
+from PySide6.QtGui import QColor, QDesktopServices, QFont, QFontMetrics, QIcon, QPainter, QPen
 from PySide6.QtWidgets import (
     QApplication, QComboBox, QHBoxLayout, QLabel, QListWidget, QListWidgetItem,
     QMainWindow, QMessageBox, QProgressBar, QPushButton, QSlider, QSpinBox,
@@ -763,9 +764,18 @@ class MainWindow(QMainWindow):
         super().closeEvent(e)
 
 
+def resource_path(rel: str) -> Path:
+    """Acha arquivos embutidos: na pasta do projeto ou, no .exe, dentro do pacote."""
+    base = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent.parent))
+    return base / rel
+
+
 def run(songs_dir: Path) -> int:
     app = QApplication.instance() or QApplication([])
     app.setStyleSheet(STYLE)
+    icon = resource_path("assets/icon.png")
+    if icon.exists():
+        app.setWindowIcon(QIcon(str(icon)))
     songs_dir.mkdir(parents=True, exist_ok=True)
     win = MainWindow(songs_dir)
     win.show()

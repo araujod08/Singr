@@ -24,7 +24,8 @@ REM ---- 2) build ----
 echo [2/4] Gerando o .exe (pode demorar 1 a 3 minutos)...
 set "ICONE="
 if exist "icon.ico" set "ICONE=--icon icon.ico"
-python -m PyInstaller --noconfirm --clean --noconsole --onedir --name Karaoke %ICONE% --collect-all _sounddevice_data main.py
+if not exist "icon.ico" echo Aviso: icon.ico nao encontrado, o exe ficara com o icone padrao.
+python -m PyInstaller --noconfirm --clean --noconsole --onedir --name Karaoke %ICONE% --add-data "assets;assets" --collect-all _sounddevice_data main.py
 if errorlevel 1 goto :erro
 
 REM ---- 3) pasta final facil de achar: "Karaoke App" ao lado deste arquivo ----

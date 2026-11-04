@@ -19,8 +19,8 @@ Dê dois cliques em `build.bat`. Ele cria o ambiente virtual, instala tudo, gera
 a pasta **`Karaoke App`** ao lado do `build.bat` (abre sozinha no fim), com `Karaoke.exe` e `songs\`.
 Ele também pergunta se quer um atalho na Área de Trabalho.
 Rodar de novo atualiza o programa sem apagar as músicas que você pôs em `Karaoke App\songs`.
-Para distribuir, compacte a pasta `Karaoke App` inteira. (Opcional: um `icon.ico` ao lado do
-`build.bat` vira o ícone do programa.)
+Para distribuir, compacte a pasta `Karaoke App` inteira. O ícone do programa é o `icon.ico` da raiz
+(o `assets/icon.png` é o da janela). Para trocar, substitua os dois e rode o `build.bat` de novo.
 
 ## Como usar
 
