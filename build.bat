@@ -35,6 +35,12 @@ robocopy "dist\Karaoke" "Karaoke App" /MIR /XD songs /NFL /NDL /NJH /NJS /NP >nu
 if errorlevel 8 goto :erro
 robocopy "songs" "Karaoke App\songs" /E /NFL /NDL /NJH /NJS /NP >nul
 if errorlevel 8 goto :erro
+REM ferramentas para criar musicas: ficam FORA do .exe (podem ser atualizadas sem novo build)
+robocopy "tools" "Karaoke App\ferramentas" audio_to_ultrastar.py letras_pt.py /NFL /NDL /NJH /NJS /NP >nul
+if errorlevel 8 goto :erro
+copy /Y "requirements-tools.txt" "Karaoke App\ferramentas\" >nul
+copy /Y "criar_musicas.bat" "Karaoke App\" >nul
+copy /Y "LEIA-ME.txt" "Karaoke App\" >nul
 
 REM ---- 4) atalho na Area de Trabalho ----
 echo [4/4] Atalho

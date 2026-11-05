@@ -54,32 +54,35 @@ songs/minha-musica/
 └─ playback.mp3    # também aceita .ogg, .wav, .flac
 ```
 
-### Jeito automático (recomendado): `audio_to_ultrastar.py`
+### Jeito automático (recomendado): `criar_musicas.bat`
 
-**Mais fácil:** dois cliques em `criar_musicas.bat` (na pasta do projeto, ao lado do `build.bat`).
-Ele usa a pasta `Karaoke App\songs` se ela existir (senão, `songs`), instala o que falta na primeira vez
-e processa os áudios novos, num ambiente próprio (`.venv-tools`) com Python 3.11 a 3.14
-(se só tiver o 3.15, instale o 3.12: `winget install Python.Python.3.12`). Precisa do ffmpeg (`winget install ffmpeg`). Depois, abra o Karaokê e
-clique em **Recarregar**. Essas ferramentas ficam só no seu computador: quem receber a pasta
-`Karaoke App` não precisa delas, só das músicas já prontas.
+Funciona **dentro da pasta `Karaoke App` já pronta**, sem rebuild: o `build.bat` copia para ela o
+`criar_musicas.bat`, a pasta `ferramentas\` e um `LEIA-ME.txt` (quem receber o app usa do mesmo jeito).
+Para uma pasta `Karaoke App` que você já gerou antes, basta copiar esses três itens para dentro dela.
 
-Pela linha de comando (equivalente):
+1. Coloque o áudio original (com voz) em `songs\`, como `Artista - Título.mp3`.
+2. Coloque a **letra em texto** com o mesmo nome: `Artista - Título.txt` (uma linha = uma linha na tela;
+   linhas `[Refrão]` e `# comentários` são ignoradas).
+3. Dois cliques em `criar_musicas.bat`. Na primeira vez ele oferece instalar Python 3.12 e ffmpeg (winget) e
+   baixa as bibliotecas (alguns GB) em `%LOCALAPPDATA%\Karaoke`, fora da pasta do app.
+4. No Karaokê, clique em **Recarregar**.
 
-```bash
-pip install -r requirements-tools.txt     # demucs + librosa (precisa de ffmpeg no PATH)
-# 1) jogue os áudios ORIGINAIS (com voz) em songs/, de preferência como "Artista - Título.mp3"
-# 2) rode:
-python tools/audio_to_ultrastar.py            # só a melodia
-python tools/audio_to_ultrastar.py --letra    # + tenta transcrever a letra (pip install faster-whisper)
-```
+Como a letra entra: o texto é dividido em sílabas (português) e distribuído sobre as notas ouvidas na voz,
+linha por linha; quando há mais sílabas que notas, o script divide as notas nos ataques de sílaba do áudio;
+quando há menos, a nota sustentada fica sem texto (`~`). É uma aproximação: confira no Karaokê ou ajuste no
+Yass Reloaded. O script avisa se o número de sílabas e de notas for muito diferente.
 
-Para cada áudio novo ele cria `songs/<nome>/` com o `playback.mp3` (voz removida pelo demucs),
-o `song.txt` e o áudio original. Pastas que já têm `song.txt` são ignoradas.
-Em CPU o demucs leva alguns minutos por música (`--device cuda` acelera se tiver placa NVIDIA).
+Para **corrigir ou acrescentar a letra depois**, edite o `letra.txt` dentro da pasta da música e rode o
+`criar_musicas.bat` de novo: só a letra é refeita, sem processar o áudio (a análise fica em `analise.json`).
+Para refazer tudo, use `--refazer`.
 
-Limitações: precisa da gravação **original com voz** (num playback não há melodia para extrair);
-às vezes sai uma nota na oitava errada (não afeta a pontuação, que ignora oitava); a letra
-transcrita erra bastante em português com música: revise no Yass Reloaded.
+Requisitos: **Python 3.11 a 3.14** (o 3.15 ainda não funciona com o demucs) e ffmpeg; o `.bat` instala os dois.
+Limitações: precisa da gravação **original com voz** (num playback não há melodia); às vezes sai uma nota na
+oitava errada (não afeta a pontuação, que ignora oitava); a divisão em sílabas segue as regras gerais do
+português e pode errar em exceções (ex.: "aleluia" vira 3 sílabas em vez de 5).
+
+Linha de comando equivalente (no ambiente das ferramentas): `python ferramentas\audio_to_ultrastar.py --songs songs`.
+Sem letra em texto, `--whisper` tenta transcrever (erra bastante em português com música ao fundo).
 
 ### Outras formas de criar o `song.txt`
 
@@ -104,5 +107,6 @@ karaoke/pitch.py        captura do mic + YIN (via FFT)
 karaoke/scoring.py      lógica de pontuação, combo e notas
 karaoke/player.py       playback e relógio da música (contagem, pausa)
 karaoke/ui.py           telas: biblioteca, canto (barras + letra), resultado
-tools/                  make_demo.py, midi_to_ultrastar.py, audio_to_ultrastar.py
+tools/                  make_demo.py, midi_to_ultrastar.py, audio_to_ultrastar.py, letras_pt.py
+criar_musicas.bat       cria músicas (usa tools/ ou ferramentas/)   ·   LEIA-ME.txt: guia de quem recebe o app
 ```

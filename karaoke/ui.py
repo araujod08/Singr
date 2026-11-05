@@ -235,10 +235,14 @@ class LyricsView(QWidget):
     def _draw_line(self, p: QPainter, line, y: float, size: int, active: bool) -> None:
         font = QFont()
         font.setBold(True)
+        # "~" = nota sustentada (sem sílaba nova): não aparece; sem letra nenhuma, mostra ♪
+        textos = ["" if n.text.strip() == "~" else n.text for n in line.notes]
+        if not any(textos):
+            textos = ["♪ "] * len(line.notes)
         while True:
             font.setPointSize(size)
             fm = QFontMetrics(font)
-            widths = [fm.horizontalAdvance(n.text) for n in line.notes]
+            widths = [fm.horizontalAdvance(t) for t in textos]
             total = sum(widths)
             if total <= self.width() - 40 or size <= 12:
                 break
@@ -247,16 +251,16 @@ class LyricsView(QWidget):
         x = (self.width() - total) / 2
         base_y = y + (fm.ascent() - fm.descent()) / 2
         base = QColor("#d6dcf0") if active else QColor("#5d6684")
-        for n, wd in zip(line.notes, widths):
+        for n, t, wd in zip(line.notes, textos, widths):
             p.setPen(base)
-            p.drawText(QPointF(x, base_y), n.text)
+            p.drawText(QPointF(x, base_y), t)
             if active:
                 frac = min(1.0, max(0.0, (self.t - n.start) / max(n.duration, 1e-3)))
                 if frac > 0:
                     p.save()
                     p.setClipRect(QRectF(x, 0, wd * frac, self.height()))
                     p.setPen(QColor("#ffd24a"))
-                    p.drawText(QPointF(x, base_y), n.text)
+                    p.drawText(QPointF(x, base_y), t)
                     p.restore()
             x += wd
 

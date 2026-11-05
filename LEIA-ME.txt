@@ -1,0 +1,45 @@
+KARAOKE
+=======
+
+CANTAR
+  Abra o Karaoke.exe, escolha a música e clique em "Cantar". Use fones de ouvido
+  (senão o microfone capta o som da caixa). Espaço pausa, Esc sai.
+
+
+CRIAR SUAS PRÓPRIAS MÚSICAS (com a sua letra)
+
+  1. Coloque o áudio (mp3 ou wav) dentro da pasta "songs", de preferência assim:
+         Artista - Título.mp3
+     Use a gravação ORIGINAL, com a voz: o programa remove a voz para criar o
+     playback e usa a melodia dela para a pontuação.
+
+  2. Se tiver a letra, salve em um arquivo de TEXTO com o mesmo nome do áudio:
+         Artista - Título.txt
+       - uma linha de texto = uma linha na tela (quebre como quiser ver)
+       - linhas em branco, linhas [entre colchetes] e linhas iniciadas com # são ignoradas
+
+  3. Dê dois cliques em  criar_musicas.bat
+     Na primeira vez ele oferece instalar o Python 3.12 e o ffmpeg e baixa as ferramentas
+     (alguns GB; precisa de internet). Isso só acontece uma vez.
+
+  4. Cada música leva alguns minutos. Quando terminar, abra o Karaoke e clique em
+     "Recarregar".
+
+  Cada música vira uma pasta em "songs" com:
+         playback.mp3   o instrumental (sem a voz)
+         song.txt       notas + letra
+         letra.txt      a sua letra
+         original.mp3   o áudio que você colocou
+
+
+CORRIGIR OU ADICIONAR A LETRA DEPOIS
+  Edite o letra.txt dentro da pasta da música e rode o criar_musicas.bat de novo.
+  Só a letra é refeita (rápido, sem processar o áudio outra vez).
+
+
+OBSERVAÇÕES
+  - A letra é distribuída automaticamente sobre as notas que o programa ouviu na voz,
+    então a sincronia é aproximada. Funciona melhor quando o texto tem as mesmas
+    sílabas cantadas na gravação (confira repetições do refrão, por exemplo).
+  - O criar_musicas.bat avisa quando o número de sílabas e de notas é bem diferente.
+  - Use apenas áudios e letras que você tenha direito de usar.
